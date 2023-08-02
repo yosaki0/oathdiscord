@@ -13,6 +13,7 @@ py -3 -m pip install .
 ```py
 import discord
 from oathdiscord import OaBot
+from oathdiscord.ext import OauthAppCommandPermissions
 
 
 class Bot(OaBot):
@@ -32,8 +33,15 @@ bot = Bot()
 
 
 @bot.command()
-async def ping(ctx):
-    await ctx.send("pong")
+async def modify_perms(ctx):
+    guild_id = ctx.guild.id
+    app_command_id = 123
+
+    permissions = [OauthAppCommandPermissions(12938332444545, 1, False)]
+
+    await bot.edit_app_command_perms(
+        guild_id=guild_id, command_id=app_command_id, permissions=permissions
+    )
 
 
 bot.run("<token>")
