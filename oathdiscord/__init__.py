@@ -1,1 +1,1 @@
-from ok import sayhello
+from .ext import OaBot
